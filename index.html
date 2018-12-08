@@ -129,49 +129,53 @@
                 <div class="col-xs-6">
                     <div class="item firstTime form-group">
                         <div class="item__content">
-                            肉蟹今日消耗
-                            <span class="coin">￥</span>
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
+                            <b>肉蟹</b>
+                            <p>今日消耗
+                            <b class="rxxhResult" style="color:red;">
+                                {{ rxxhResult }}斤
+                            </b></p>
+                            <p>库存
+                            <b class="rxckResult" style="color:red;">
+                                {{ rxckResult }}斤
                             </b>
-                            ；库存
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
+                            </p>
+                            <p>建议明日采购
+                            <b class="rxcgResult" style="color:red;">
+                                {{ rxcgResult }}斤
                             </b>
-                            ；建议明日采购
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
-                            </b>
+                            </p>
                         </div>
+                        <hr/>
                         <div class="item__content">
-                            膏蟹今日消耗
-                            <span class="coin">￥</span>
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
+                            <b>膏蟹</b>
+                            <p>今日消耗
+                            <b class="gxxhResult" style="color:red;">
+                                {{ gxxhResult }}斤
+                            </b></p>
+                            </p>
+                            <p>建议明日采购
+                            <b class="gxcgResult" style="color:red;">
+                                {{ gxcgResult }}斤
                             </b>
-                            ;库存
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
-                            </b>
-                            ；建议明日采购
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
-                            </b>
+                            </p>
                         </div>
+                        <hr/>
                         <div class="item__content">
-                            三点蟹今日消耗
-                            <span class="coin">￥</span>
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
+                            <b>三点蟹</b>
+                            <p>今日消耗
+                            <b class="hxxhResult" style="color:red;">
+                                {{ hxxhResult }}斤
+                            </b></p>
+                            <p>库存
+                            <b class="hxckResult" style="color:red;">
+                                {{ hxckResult }}斤
                             </b>
-                            ;库存
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
+                            </p>
+                            <p>建议明日采购
+                            <b class="hxcgResult" style="color:red;">
+                                {{ hxcgResult }}斤
                             </b>
-                            ；建议明日采购
-                            <b class="firstTimeResult" style="color:red;">
-                                {{ firstTimeResult }}斤
-                            </b>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -184,13 +188,12 @@
     new Vue({
         el: '#app',
         data: {
-            numInput: '',
-            rxdInput: '',
-            rxxInput: '',
-            gxdInput: '',
-            gxxInput: '',
-            hxdInput: '',
-            hxxInput: '',
+            rxdInput: 0,
+            rxxInput: 0,
+            gxdInput: 0,
+            gxxInput: 0,
+            hxdInput: 0,
+            hxxInput: 0,
             rxcInput: 0,
             gxcInput: 0,
             hxcInput: 0,
@@ -202,25 +205,32 @@
             }
         },
         computed: {
-            outTimeResult: function () {
-                return (this.numInput * this.countInput * 0.388).toFixed(2);
+            rxxhResult: function () {
+                return (this.rxdInput * 1.4 + this.rxxInput * 1.1).toFixed(2);
             },
-            firstTimeResult: function () {
-                return (this.numInput * this.countInput * 0.0026).toFixed(2);
+            rxckResult: function () {
+                return (this.rxcInput).toFixed(2);
             },
-            saveCount: function () {
-                return (this.outTimeResult - this.firstTimeResult).toFixed(2);
+            rxcgResult: function () {
+                return (this.yyeInput * 0.002 - this.rxcInput).toFixed(2);
             },
-            saveTipCount: function () {
-                return (this.saveCount / 26).toFixed(2);
+            gxxhResult: function () {
+                return (this.gxdInput * 1.4 + this.gxxInput * 1.1).toFixed(2);
             },
-            pecentCount: function () {
-                if (this.numInput > 0) {
-                    return (parseFloat(this.saveCount / this.outTimeResult) * 100).toFixed(1) + '%'
-                } else {
-                    return '0.0%'
-                }
-                ;
+            gxckResult: function () {
+                return (this.gxcInput).toFixed(2);
+            },
+            gxcgResult: function () {
+                return (this.yyeInput * 0.0008 - this.gxcInput).toFixed(2);
+            },
+            hxxhResult: function () {
+                return (this.hxdInput * 0.25 + this.hxxInput * 0.17).toFixed(2);
+            },
+            hxckResult: function () {
+                return (this.hxcInput).toFixed(2);
+            },
+            hxcgResult: function () {
+                return (this.yyeInput * 0.0006 - this.hxcInput).toFixed(2);
             }
         }
     })
